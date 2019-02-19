@@ -1,0 +1,10 @@
+# Compiled binaries
+*.hex
+
+# Archives
+*.zip
+*.7z
+*.rar
+
+# Raw image directory
+images/
