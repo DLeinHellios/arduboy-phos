@@ -1,5 +1,5 @@
-#ifndef CLASSES_H
-#define CLASSES_H
+#ifndef SHIPS_H
+#define SHIPS_H
 
 
 

@@ -4,8 +4,6 @@
 ## Description
 Phos is a simple space shooter for the [Arduboy](https://arduboy.com/) game system. You are the pilot of Phos, the last line of defense against the invading generic alien army. Utilize your only weapon in a futile attempt to outlast the barrage. Points reward your efforts, but they only serve to antagonize our alien overlords. You won't make it out alive, but the points seem to help a little.
 
-Thanks are owed to the wonderful [Arduboy2 library](https://github.com/MLXXXp/Arduboy2), without which, this game would not have been possible.
-
 ## Features
 - Infinite gameplay with increasing difficulty
 - Four varieties of standard enemy ships
@@ -13,7 +11,7 @@ Thanks are owed to the wonderful [Arduboy2 library](https://github.com/MLXXXp/Ar
 - Game statistics on game over
 - Comfortable controls (No jumping between up and down buttons!)
 - Animated menu screens
-- Simple sounds for some auditory feedback
+- Simple sound effects for auditory feedback
 
 ## Potential Improvements
 - Additional enemy variation
@@ -37,9 +35,10 @@ Thanks are owed to the wonderful [Arduboy2 library](https://github.com/MLXXXp/Ar
 2. Rename directory to "Phos" (remove "-master")
 3. Open .ino file in Arduino IDE
 4. Select "Arduboy" board
-5. Compile and transfer to Arduboy
+5. Compile and transfer to Arduboy</br>
 ***Requires Arduboy board configuration and Arduboy2 and ArduboyTones libraries**
 
 ## Credits
 Code by [Dial](https://github.com/dleinhellios)</br>
-Art by Schuss
+Art by Schuss</br>
+Thanks are owed to the wonderful [Arduboy2 library](https://github.com/MLXXXp/Arduboy2).

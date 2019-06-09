@@ -7,14 +7,14 @@
 #include <Sprites.h>
 
 
-Arduboy2 arduboy;
+Arduboy2Base arduboy;
 Sprites sprites;
 ArduboyTones sound(arduboy.audio.enabled);
 
 
 #include "bitmaps.h"
 #include "sounds.h"
-#include "classes.h"
+#include "ships.h"
 
 
 // Game
