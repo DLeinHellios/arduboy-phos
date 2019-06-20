@@ -1,6 +1,8 @@
 #ifndef SHIPS_H
 #define SHIPS_H
 
+#include "bitmaps.h"
+#include "sounds.h"
 
 
 class Enemy {
@@ -441,6 +443,13 @@ class Shot {
             isLive = false;
         }
 };
+
+
+// Init Objects and Object-Arrays
+Phos phos;
+Shot shotArray[PHOS_MAX_SHOTS];
+Enemy enemyArray[ENEMY_MAX_SPAWNS];
+Elite elite;
 
 
 #endif

@@ -7,45 +7,42 @@
 #include "menu.h"
 #include "endgame.h"
 
+
 void setup() {
     arduboy.begin();
     arduboy.setFrameRate(GAME_FPS);
-    arduboy.audio.off();
     initStars();
 }
+
 
 void loop() {
     if (!arduboy.nextFrame()) {return;}
     arduboy.clear();
 
-    //---- Menu Screen ----
-    if (gameState == 0) {
-        menuFrame();
-    }
+    switch(gameState) {
+        case 0:
+            menuFrame();
+            break;
 
-    //---- Game Active ----
-    if (gameState == 1)  {
-        gameFrame();
-    }
+        case 1:
+            gameFrame();
+            break;
 
-    //---- Game Pause ----
-    if (gameState == 2) {
-        pauseFrame();
-    }
+        case 2:
+            pauseFrame();
+            break;
 
-    //---- Game Over ----
-    if (gameState == 3)  {
-        endgameFrame();
-    }
+        case 3:
+            endgameFrame();
+            break;
 
-    //---- Game Info ----
-    if (gameState == 4)  {
-        infoFrame();
-    }
+        case 4:
+            infoFrame();
+            break;
 
-    //---- Credits ----
-    if (gameState == 5)  {
-        creditsFrame();
+        case 5:
+            creditsFrame();
+            break;
     }
 
     arduboy.display();

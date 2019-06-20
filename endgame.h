@@ -1,10 +1,11 @@
 #ifndef ENDGAME_H
 #define ENDGAME_H
 
+#include "menu.h"
+#include "bitmaps.h"
 
-//==================== Game Over Functions ====================
 
-
+//==================== Game Over Screen ====================
 void drawGameOver() {
     // Handles title animation
     animationCounter += 1;

@@ -1,11 +1,26 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include "game.h"
 
-// ==================== Menu Functions ====================
+
+// ==================== Main Menu ====================
+void menuExit() {
+    // Exits pages to main menu
+    arduboy.pollButtons();
+    if (arduboy.justPressed(A_BUTTON) || arduboy.justPressed(B_BUTTON))  {
+        for (int i = 0; i < ENEMY_MAX_SPAWNS; i++) {
+            enemyArray[i].killMe();
+        }
+    animationCounter = 0;
+    titleFrame = 0;
+    gameState = 0;
+    }
+}
 
 
-void menuEvents() { //Handles menu options
+void menuEvents() {
+    //Handles menu options
     arduboy.pollButtons();
 
     if (arduboy.justPressed(A_BUTTON) || arduboy.justPressed(B_BUTTON))  {
@@ -91,9 +106,7 @@ void menuFrame() {
 }
 
 
-//==================== Page Functions ====================
-
-
+//==================== Other Pages ====================
 // ---- Pause ----
 void pauseEvents()  {
     arduboy.pollButtons();

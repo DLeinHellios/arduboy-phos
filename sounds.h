@@ -2,6 +2,12 @@
 #define SOUNDS_H
 
 
+// -- Sound Object --
+ArduboyTones sound(arduboy.audio.enabled);
+
+
+
+// -- Tones Arrays --
 const uint16_t PROGMEM eliteTones[] =
 {
     NOTE_G3,125, NOTE_C4,125, NOTE_G4,125, NOTE_C5,100,
@@ -22,8 +28,10 @@ const uint16_t PROGMEM deathTones[] =
 };
 
 
-// ===== Game Sounds =====
+
+// -- Sound Functions --
 void shootSound() {
+    // Single shoot tone
     if(!sound.playing()) {
         sound.tone(NOTE_C3,100);
     }
@@ -31,6 +39,7 @@ void shootSound() {
 
 
 void enemyKillSound(bool phosActive) {
+    // Single kill tone
     if(phosActive) {
         sound.tone(NOTE_C4,125);
     }
@@ -38,6 +47,7 @@ void enemyKillSound(bool phosActive) {
 
 
 void eliteHitSound(bool phosActive) {
+    // Single hit tone
     if(phosActive) {
         sound.tone(NOTE_G3,125);
     }
@@ -45,6 +55,7 @@ void eliteHitSound(bool phosActive) {
 
 
 void eliteKillSound(bool phosActive) {
+    // Several tones ascending
     if(phosActive) {
         sound.tones(eliteTones);
     }
@@ -52,11 +63,13 @@ void eliteKillSound(bool phosActive) {
 
 
 void deathSound() {
+    // Several tones descending
     sound.tones(deathTones);
 }
 
 
 void lastLifeSound() {
+    // Three single tones
     sound.tones(lastLifeTones);
 }
 

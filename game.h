@@ -1,8 +1,31 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "ships.h"
 
-//==================== Game Functions ====================
+
+//==================== Setup ====================
+void initStars()  {
+    // Sets random starting stars
+    for (int i = 0; i < GAME_MAX_STARS; i++) {
+        starsX[i] = random(1, 128);
+        starsY[i] = random(63);
+    }
+}
+
+
+int * convertScore(long n) {
+    // Converts 5-digit long to array of ints
+    static int scoreArray[5];
+
+    scoreArray[0] = n / 10000;
+    scoreArray[1] = (n / 1000) - ((n / 10000) * 10);
+    scoreArray[2] = (n / 100) - ((n / 1000) * 10);
+    scoreArray[3] = (n / 10) - ((n / 100) * 10);
+    scoreArray[4] = n - ((n / 10) * 10);
+
+    return scoreArray;
+}
 
 
 void resetValues() {
@@ -48,9 +71,8 @@ void startGame() {
     gameState = 1;
 }
 
-// ---- Event Handling ----
 
-
+//==================== Events ====================
 void shootEvent() {
     // Fires first available shot if < max shots active
     for (int i = 0; i < PHOS_MAX_SHOTS; i++) {
@@ -89,13 +111,11 @@ void gameEvents() {
 }
 
 
-// ---- Update Variables ----
-
-
+//==================== Update ====================
 void spawnEnemies(int enemySpawnFrame)  {
     // Handles spawning of regular enemies, accepts interval between spawns
     enemyCounter++;
-    if (enemyCounter >= enemySpawnFrame && spawning) {
+    if (enemyCounter >= enemySpawnFrame && (spawning || gameState == 0)) {
         for (int i = 0; i < ENEMY_MAX_SPAWNS; i++) {
             // Activate first available enemy
             if (!enemyArray[i].checkLife())  {
@@ -123,6 +143,18 @@ void scoreOverflow() {
     if (gameScore > 99999) {
         gameScore -= 99999;
         gameScoreArray = convertScore(gameScore);
+    }
+}
+
+
+void updateStars()  {
+    // Updates star positions and spawns
+    for (int i = 0; i < GAME_MAX_STARS; i++) {
+        starsX[i]--;
+        if (starsX[i] < 0) {
+            starsX[i] = random(128, 132);
+            starsY[i] = random(63);
+        }
     }
 }
 
@@ -207,6 +239,14 @@ void getLife() {
 }
 
 
+void checkAccuracy() {
+    int accuracy = (int)round((float)statsHit / (float)statsFired * 100);
+
+    statsAccuracy0 = accuracy / 10;
+    statsAccuracy1 = accuracy-((accuracy/10)*10);
+}
+
+
 void checkGameOver() {
     // Moves to game over screen when lives = 0
     if (phos.checkLives() <= 0)  {
@@ -242,7 +282,13 @@ void gameUpdate() {
 }
 
 
-// ---- Screen Drawing ----
+//==================== Drawing ====================
+void drawStars()  {
+    // Draws star background
+    for (int i = 0; i < GAME_MAX_STARS; i++) {
+        arduboy.drawPixel(starsX[i], starsY[i]);
+    }
+}
 
 
 void drawShots()  {
@@ -285,6 +331,14 @@ void drawUIText()  {
 }
 
 
+void drawEnemies()  {
+    // Iterates over enemy ship array and calls draw
+    for (int i = 0; i < ENEMY_MAX_SPAWNS; i++) { //Enemy Ships
+        enemyArray[i].draw();
+    }
+}
+
+
 void drawDeathAnimation() {
     // Draws player death explosion
     animationCounter += 1;
@@ -322,9 +376,7 @@ void gameDraw()  {
 }
 
 
-// ---- Collision Checking ----
-
-
+//==================== Collision ====================
 void updateDeath() {
     // Starts player death updates
     deathSound();
@@ -407,9 +459,7 @@ void gameCheckCollision() {
 }
 
 
-// =======================================
-
-
+//==================================================
 void gameFrame() {
     // Conducts one frame of gameplay
     gameEvents();
