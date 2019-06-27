@@ -43,8 +43,13 @@ int titleFrame = 0; // Frame of title animation
 int deathFrame = 0; // Death frame animation
 int deathPos = 0; // y-position of player on death
 int gameOverFrame = 0; // Frame of game over animation
-int starsX[GAME_MAX_STARS];
-int starsY[GAME_MAX_STARS];
+int starsX[GAME_MAX_STARS]; // Star x positions
+int starsY[GAME_MAX_STARS]; // Star y positions
 
+// -- Menu --
+int menuItem = 0; // Item for currently selected menu option
+int volumeLevel = 1; // Keeps track of volume setting
+int cursorX[4] = {35,39,39,41}; // x position for menu selection 
+int cursorY[4] = {25,33,41,49}; // y position for menu selection
 
 #endif

@@ -19,34 +19,64 @@ void menuExit() {
 }
 
 
+void volumeSelect() {
+    switch(volumeLevel) {
+        case 0:
+            arduboy.audio.on();
+            sound.volumeMode(VOLUME_ALWAYS_NORMAL);
+            lastLifeSound();
+            volumeLevel = 1;
+            break;
+        case 1:
+            sound.volumeMode(VOLUME_ALWAYS_HIGH);
+            lastLifeSound();
+            volumeLevel = 2;
+            break;
+        case 2:
+            arduboy.audio.off();
+            sound.noTone();
+            volumeLevel = 0;
+            break;
+    }
+}
+
+
 void menuEvents() {
     //Handles menu options
     arduboy.pollButtons();
 
     if (arduboy.justPressed(A_BUTTON) || arduboy.justPressed(B_BUTTON))  {
-        sound.noTone();
-        startGame();
-    }
-
-    if (arduboy.justPressed(UP_BUTTON))  {
-        gameState = 4;
-    }
-
-    if (arduboy.justPressed(DOWN_BUTTON))  {
-        gameState = 5;
-    }
-
-    if (arduboy.justPressed(LEFT_BUTTON))  {
-        if (arduboy.audio.enabled())  {
-            // Disable
-            arduboy.audio.off();
-            sound.noTone();
-        } else  {
-            // Enable
-            arduboy.audio.on();
-            lastLifeSound();
+        switch(menuItem) {
+            case 0:
+                sound.noTone();
+                startGame();
+                break;
+            case 1:
+                gameState = 4;
+                break;
+            case 2:
+                volumeSelect();
+                break;
+            case 3:
+                gameState = 5;
+                break;
         }
     }
+
+    if (arduboy.justPressed(DOWN_BUTTON) || arduboy.justPressed(RIGHT_BUTTON))  {
+        menuItem++;
+        if(menuItem > 3) {
+            menuItem = 0;
+        }
+    }
+
+    if (arduboy.justPressed(UP_BUTTON) || arduboy.justPressed(LEFT_BUTTON))  {
+        menuItem--;
+        if(menuItem < 0) {
+            menuItem = 3;
+        }
+    }
+
 }
 
 
@@ -68,13 +98,10 @@ void menuUpdate() {
 void drawTitle()  {
     // Handles title animation
     animationCounter += 1;
-    int nFrames = 5;
-    if(animationCounter >= TITLE_FREQ) {
-        if(titleFrame < nFrames) {
-            if(animationCounter % 2 == 0) {
-                titleFrame += 1;
-            }
-        } else if(animationCounter % 2 == 0) {
+    if(animationCounter > TITLE_FREQ) {
+        if(titleFrame < 5) {
+            titleFrame = (animationCounter - TITLE_FREQ) / 2;
+        } else {
             animationCounter = 0;
             titleFrame = 0;
         }
@@ -85,8 +112,9 @@ void drawTitle()  {
 
 void drawContents()  {
     //Draws available menu actions
-    sprites.drawSelfMasked(33,24,menuContent,0);
-    sprites.drawExternalMask(94,39,soundSprite,soundMask,arduboy.audio.enabled(),0);
+    sprites.drawSelfMasked(41,26,menuContent,0);
+    sprites.drawSelfMasked(cursorX[menuItem],cursorY[menuItem],menuArrow,0);
+    sprites.drawSelfMasked(81,41,nums,volumeLevel);
 }
 
 
