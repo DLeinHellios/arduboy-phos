@@ -1,6 +1,5 @@
 // Phos - Simple space shooter for the Arduboy
-// Code by Dial - Art by Schuss
-// https://github.com/DLeinHellios/arduboy-phos
+
 
 #include "globals.h"
 #include "game.h"

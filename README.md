@@ -32,6 +32,6 @@ Phos is a simple space shooter for the [Arduboy](https://arduboy.com/) game syst
 ***Requires Arduboy board configuration and Arduboy2 and ArduboyTones libraries**
 
 ## Credits
-Code by [Dial](https://github.com/dleinhellios)</br>
-Art by Schuss</br>
+Code by [Dial](https://dleinhellios.com)</br>
+Art by ZN</br>
 Thanks are owed to the wonderful [Arduboy2 library](https://github.com/MLXXXp/Arduboy2).
