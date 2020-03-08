@@ -24,7 +24,7 @@ Phos is a simple space shooter for the [Arduboy](https://arduboy.com/) game syst
 
 ## Installation
 1. Download source and extract
-2. Rename extracted directory, remove "-master"
+2. Rename extracted directory to "Phos" - folder name must match .ino file name
 3. Plug in Arduboy and power on
 3. Open .ino file in Arduino IDE
 4. Select port and "Arduboy" board
